@@ -1,0 +1,27 @@
+# Environnement
+.env
+.env.local
+.env.*.local
+
+# Frontend (Next.js)
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/next-env.d.ts
+frontend/.turbo/
+npm-debug.log*
+
+# Backend (Maven / Java)
+backend/target/
+backend/.mvn/
+backend/*.log
+*.class
+
+# IDE / OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+
+# Docker
+db_data/

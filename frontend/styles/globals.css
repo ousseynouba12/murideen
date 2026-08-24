@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --sand: #F6EFE4;
+  --sand-raised: #FFFDF9;
+  --sand-sunken: #EFE4D2;
+  --ink: #241C19;
+  --ink-soft: #6F6255;
+  --ink-faint: #A79A8B;
+  --wine: #4A1E2E;
+  --wine-soft: #6B2C41;
+  --wine-tint: #F1E1E6;
+  --gold: #B9862F;
+  --gold-deep: #8F6522;
+  --gold-tint: #F3E6C9;
+  --line: #E4D8C5;
+  --line-strong: #CDBB9F;
+  --ok: #3F7D50;
+  --ok-tint: #E4EFE4;
+  --warn: #B54B32;
+  --warn-tint: #F3E1DA;
+  --teal: #3E7A78;
+  --teal-tint: #E3EEEC;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background: var(--sand);
+  color: var(--ink);
+}
+
+body {
+  font-family: "Jost", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: "Cormorant Garamond", serif;
+}
+
+::selection {
+  background: var(--wine-tint);
+  color: var(--wine);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* Zone tactile minimale de 44px pour tous les éléments cliquables sur mobile */
+.tap-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
