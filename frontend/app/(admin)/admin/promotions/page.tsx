@@ -116,7 +116,11 @@ export default function AdminPromotionsPage() {
                         </button>
                       </td>
                       <td className="py-2.5 text-right">
-                        <button onClick={() => deletePromotion(p.id)} className="tap-target text-ink-faint hover:text-warn">
+                        <button
+                          onClick={() => deletePromotion(p.id)}
+                          aria-label={`Supprimer le code promo ${p.code}`}
+                          className="tap-target text-ink-faint hover:text-warn"
+                        >
                           <IconTrash className="h-4 w-4" />
                         </button>
                       </td>

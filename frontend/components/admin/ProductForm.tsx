@@ -160,9 +160,10 @@ export function ProductForm({ product }: { product?: Product }) {
           <div className="flex flex-wrap gap-3">
             {images.map((url, i) => (
               <div key={i} className="relative h-20 w-20 overflow-hidden rounded-[12px] bg-sand-sunken">
-                <Image src={url} alt="" fill className="object-cover" />
+                <Image src={url} alt={`Photo ${i + 1} du produit`} fill className="object-cover" />
                 <button
                   onClick={() => setImages((prev) => prev.filter((_, idx) => idx !== i))}
+                  aria-label={`Retirer la photo ${i + 1}`}
                   className="absolute right-0.5 top-0.5 rounded-full bg-ink/60 p-0.5 text-sand-raised"
                 >
                   <IconX className="h-3 w-3" />
@@ -209,7 +210,11 @@ export function ProductForm({ product }: { product?: Product }) {
                   onChange={(e) => updateVariant(i, { stock: Number(e.target.value) })}
                   className="tap-target w-24 rounded-pill border border-line px-3 text-sm"
                 />
-                <button onClick={() => removeVariant(i)} className="tap-target text-ink-faint hover:text-warn">
+                <button
+                  onClick={() => removeVariant(i)}
+                  aria-label={`Retirer la variante ${i + 1}`}
+                  className="tap-target text-ink-faint hover:text-warn"
+                >
                   <IconTrash className="h-4 w-4" />
                 </button>
               </div>
