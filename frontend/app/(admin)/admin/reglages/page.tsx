@@ -144,7 +144,11 @@ export default function AdminReglagesPage() {
                   <p className="text-ink">{z.nom}</p>
                   <p className="text-xs text-ink-faint">{formatFCFA(z.frais)} · {z.delaiEstime}</p>
                 </div>
-                <button onClick={() => removeZone(z.id)} className="tap-target text-ink-faint hover:text-warn">
+                <button
+                  onClick={() => removeZone(z.id)}
+                  aria-label={`Supprimer la zone ${z.nom}`}
+                  className="tap-target text-ink-faint hover:text-warn"
+                >
                   <IconTrash className="h-4 w-4" />
                 </button>
               </div>

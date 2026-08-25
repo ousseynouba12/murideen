@@ -15,12 +15,15 @@ export interface AuthResponse {
   utilisateur: UserProfile;
 }
 
+const AUTH_CHANGED_EVENT = "murideen:auth-changed";
+
 function persistSession(auth: AuthResponse) {
   setCookie(TOKEN_COOKIE, auth.accessToken, 30);
   setCookie(REFRESH_COOKIE, auth.refreshToken, 30);
   setCookie(ROLE_COOKIE, auth.utilisateur.role, 30);
   if (typeof window !== "undefined") {
     window.localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(auth.utilisateur));
+    window.dispatchEvent(new Event(AUTH_CHANGED_EVENT));
   }
 }
 
@@ -48,8 +51,11 @@ export function logout() {
   deleteCookie(ROLE_COOKIE);
   if (typeof window !== "undefined") {
     window.localStorage.removeItem(USER_STORAGE_KEY);
+    window.dispatchEvent(new Event(AUTH_CHANGED_EVENT));
   }
 }
+
+export { AUTH_CHANGED_EVENT };
 
 export function getToken(): string | null {
   return getCookie(TOKEN_COOKIE);

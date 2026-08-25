@@ -9,6 +9,7 @@ frontend/.next/
 frontend/out/
 frontend/next-env.d.ts
 frontend/.turbo/
+frontend/tsconfig.tsbuildinfo
 npm-debug.log*
 
 # Backend (Maven / Java)

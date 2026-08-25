@@ -3,8 +3,10 @@
 import { useEffect, useState } from "react";
 import { login, register, logout, isAuthenticated, getCurrentUser, getToken } from "@/lib/auth-client";
 import { apiFetch, ApiError } from "@/lib/api";
+import { fetchWishlist } from "@/lib/wishlist-client";
 import { formatFCFA, formatDate } from "@/lib/format";
 import { StatusBadge } from "@/components/ui/StatusBadge";
+import { ProductCard } from "@/components/shop/ProductCard";
 import { IconUser, IconLogout } from "@/components/ui/Icons";
 import type { Order, Product, UserProfile } from "@/lib/types";
 
@@ -117,7 +119,7 @@ function AccountView({ user, onLogout }: { user: UserProfile; onLogout: () => vo
     const token = getToken();
     Promise.all([
       apiFetch<Order[]>("/api/me/orders", { token, cache: "no-store" }).catch(() => []),
-      apiFetch<Product[]>("/api/me/wishlist", { token, cache: "no-store" }).catch(() => []),
+      fetchWishlist().catch(() => []),
     ]).then(([o, w]) => {
       setOrders(o);
       setWishlist(w);
@@ -185,14 +187,13 @@ function AccountView({ user, onLogout }: { user: UserProfile; onLogout: () => vo
           </div>
         )
       ) : wishlist.length === 0 ? (
-        <p className="py-10 text-center text-ink-soft">Votre liste d'envies est vide.</p>
+        <p className="py-10 text-center text-ink-soft">
+          Votre liste d'envies est vide. Touchez le cœur sur un article pour l'ajouter ici.
+        </p>
       ) : (
         <div className="grid grid-cols-2 gap-3">
           {wishlist.map((p) => (
-            <div key={p.id} className="rounded-card border border-line bg-sand-raised p-3">
-              <p className="font-display text-sm font-semibold text-ink">{p.nom}</p>
-              <p className="text-sm text-wine">{formatFCFA(p.prix)}</p>
-            </div>
+            <ProductCard key={p.id} product={p} />
           ))}
         </div>
       )}
