@@ -2,13 +2,16 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
 import type { Product } from "@/lib/types";
 import { formatFCFA } from "@/lib/format";
 import { IconHeart, IconHeartFilled, IconStar } from "@/components/ui/Icons";
+import { useWishlist } from "@/components/shop/WishlistContext";
 
 export function ProductCard({ product }: { product: Product }) {
-  const [liked, setLiked] = useState(false);
+  const router = useRouter();
+  const { ready, authenticated, isLiked, toggle } = useWishlist();
+  const liked = ready && isLiked(product.id);
   const image = product.images[0] ?? "https://placehold.co/800x1000/EFE4D2/6F6255?text=Murideen";
   const enRupture = product.stockTotal <= 0;
 
@@ -30,10 +33,15 @@ export function ProductCard({ product }: { product: Product }) {
       </Link>
       <button
         type="button"
-        aria-label="Ajouter à la liste d'envies"
+        aria-label={liked ? "Retirer de la liste d'envies" : "Ajouter à la liste d'envies"}
+        aria-pressed={liked}
         onClick={(e) => {
           e.preventDefault();
-          setLiked((v) => !v);
+          if (!authenticated) {
+            router.push("/compte");
+            return;
+          }
+          toggle(product.id);
         }}
         className="tap-target absolute right-2 top-2 flex items-center justify-center rounded-full bg-sand-raised/90 text-wine shadow-sm"
       >

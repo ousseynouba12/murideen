@@ -133,7 +133,11 @@ export default function AdminCommandesPage() {
           >
             <div className="mb-4 flex items-center justify-between">
               <h2 className="font-display text-xl font-semibold text-ink">{selected.numero}</h2>
-              <button onClick={() => setSelected(null)} className="tap-target flex items-center justify-center text-ink-faint">
+              <button
+                onClick={() => setSelected(null)}
+                aria-label="Fermer les détails de la commande"
+                className="tap-target flex items-center justify-center text-ink-faint"
+              >
                 <IconX className="h-5 w-5" />
               </button>
             </div>
